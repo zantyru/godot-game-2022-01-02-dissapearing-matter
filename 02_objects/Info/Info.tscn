@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://00_res/fonts/PressStart2P_8pt_dynamicfont.tres" type="DynamicFont" id=1]
+
+[node name="Info" type="Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+custom_fonts/font = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

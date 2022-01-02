@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+
+func _ready() -> void:
+    var x: Node = null
+    var y: Node = null
+    print(x and y)
+    print(x or y)
+    print(1 and y)
+    print(x and 2)
+    print(3 or y)
+    print(x or 4)
+    print('-------------')
+    x = get_tree().get_root()
+    y = get_tree().get_root()
+    print(x and y)
+"
+
+[node name="_" type="Node"]
+script = SubResource( 1 )

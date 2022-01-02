@@ -1,0 +1,176 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://03_scenes/LevelViewer/LevelViewer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://00_res/fonts/PressStart2P_8pt_dynamicfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://00_res/theme.tres" type="Theme" id=3]
+[ext_resource path="res://02_objects/Info/Info.tscn" type="PackedScene" id=4]
+[ext_resource path="res://00_res/fonts/PressStart2P_16pt_dynamicfont.tres" type="DynamicFont" id=5]
+[ext_resource path="res://00_res/fonts/PressStart2P_32pt_dynamicfont.tres" type="DynamicFont" id=6]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+
+#------------------------------------------------------ CLASS NAMES BY CONSTANTS
+const Level_MainMenu := preload('res://03_scenes/Level_MainMenu/Level_MainMenu.tscn')
+const Level_02_P := preload('res://03_scenes/Level_02/Level_02.tscn')
+const Level_04_P := preload('res://03_scenes/Level_04/Level_04.tscn')
+const Level_06_P := preload('res://03_scenes/Level_06/Level_06.tscn')
+const Level_08_P := preload('res://03_scenes/Level_08/Level_08.tscn')
+const Level_10_P := preload('res://03_scenes/Level_10/Level_10.tscn')
+const Level_20_P := preload('res://03_scenes/Level_20/Level_20.tscn')
+const Level_30_P := preload('res://03_scenes/Level_30/Level_30.tscn')
+const Level_40_P := preload('res://03_scenes/Level_40/Level_40.tscn')
+
+
+#-------------------------------------------------------------------- SUBCLASSES
+
+
+#----------------------------------------------------------------------- SIGNALS
+
+
+#------------------------------------------------------- VARIABLES AND CONSTANTS
+const levels := [
+    Level_02_P,
+    Level_04_P,
+    Level_06_P,
+    Level_08_P,
+    Level_10_P,
+    Level_20_P,
+    Level_30_P,
+    Level_40_P,
+]
+
+onready var __viewport: Viewport = $LevelViewer/ViewportContainer/Viewport
+onready var __level_label_data: Label = $LevelLabelData
+onready var __secret_score_label_data: Label = $SecretScoreLabelData
+
+var __current_level_instance: Level = null
+var __current_level_idx: int = 0
+var __secrets_found: int = 0
+
+
+#----------------------------------------------------------------------- METHODS
+func _ready() -> void:
+    __secret_score_label_data.text = str(__secrets_found)
+    __load_level()
+
+
+func __load_level() -> void:
+    
+    if __current_level_instance:
+        __viewport.remove_child(__current_level_instance)
+        __current_level_instance.disconnect('finished', self, '_on_Level_finished')
+        __current_level_instance.disconnect('failed', self, '_on_Level_failed')
+        __current_level_instance.disconnect('secret_item_picked_up', self, '_on_Level_secret_item_picked_up')
+        __current_level_instance.queue_free()
+    
+    if __current_level_idx < len(levels):
+        __current_level_instance = levels[__current_level_idx].instance()
+        __current_level_instance.connect('finished', self, '_on_Level_finished')
+        __current_level_instance.connect('failed', self, '_on_Level_failed')
+        __current_level_instance.connect('secret_item_picked_up', self, '_on_Level_secret_item_picked_up')
+        __viewport.add_child(__current_level_instance)
+    
+    __level_label_data.text = str(__current_level_idx + 1)
+
+
+#--------------------------------------------------------------------- CALLBACKS
+func _on_Level_finished() -> void:
+    __current_level_idx += 1
+    self.call_deferred('__load_level')
+
+
+func _on_Level_failed() -> void:
+    self.call_deferred('__load_level')
+
+
+func _on_Level_secret_item_picked_up() -> void:
+    __secrets_found += 1
+    __secret_score_label_data.text = str(__secrets_found)
+"
+
+[node name="MAIN" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="LevelViewer" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
+
+[node name="RestartLevelButton" type="Button" parent="."]
+margin_left = 16.0
+margin_top = 544.0
+margin_right = 200.0
+margin_bottom = 584.0
+theme = ExtResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+shortcut_in_tooltip = false
+text = "Перезапустить уровень"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLabelTitle" parent="." instance=ExtResource( 4 )]
+margin_left = 48.0
+margin_top = 24.0
+margin_right = 160.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 5 )
+text = "Уровень"
+
+[node name="LevelLabelData" parent="." instance=ExtResource( 4 )]
+margin_left = 48.0
+margin_top = 72.0
+margin_right = 160.0
+margin_bottom = 88.0
+custom_fonts/font = ExtResource( 6 )
+text = "##"
+align = 1
+
+[node name="SecretScoreLabelTitle" parent="." instance=ExtResource( 4 )]
+margin_left = 848.0
+margin_top = 24.0
+margin_right = 976.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 5 )
+text = "Секретов
+найдено"
+align = 1
+
+[node name="SecretScoreLabelData" parent="." instance=ExtResource( 4 )]
+margin_left = 856.0
+margin_top = 72.0
+margin_right = 968.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 6 )
+text = "##"
+align = 1
+
+[node name="SecretScoreLabelMore" parent="." instance=ExtResource( 4 )]
+margin_left = 848.0
+margin_top = 112.0
+margin_right = 976.0
+margin_bottom = 147.0
+custom_fonts/font = ExtResource( 5 )
+text = "из 4-х"
+align = 1
+
+[node name="Credits" parent="." instance=ExtResource( 4 )]
+margin_left = 984.0
+margin_top = 592.0
+margin_right = 1448.0
+margin_bottom = 627.0
+rect_rotation = -90.0
+custom_fonts/font = ExtResource( 5 )
+text = "Специально для конкурса
+2D платформеров на gamedev.ru"
+
+[connection signal="pressed" from="RestartLevelButton" to="." method="_on_Level_failed"]
+
+[editable path="LevelViewer"]

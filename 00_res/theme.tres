@@ -1,0 +1,66 @@
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[ext_resource path="res://00_res/fonts/PressStart2P_8pt_dynamicfont.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+grow_begin = 8.0
+grow_end = 8.0
+thickness = 4
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.94902, 0.952941, 0.956863, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+corner_detail = 1
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.94902, 0.952941, 0.956863, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+corner_detail = 1
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.94902, 0.952941, 0.956863, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+corner_detail = 1
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+anti_aliasing = false
+
+[resource]
+Button/colors/font_color = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+Button/colors/font_color_disabled = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+Button/colors/font_color_focus = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+Button/colors/font_color_hover = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+Button/colors/font_color_pressed = Color( 0.101961, 0.0666667, 0.0627451, 1 )
+Button/constants/hseparation = 0
+Button/fonts/font = ExtResource( 1 )
+Button/styles/disabled = null
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )

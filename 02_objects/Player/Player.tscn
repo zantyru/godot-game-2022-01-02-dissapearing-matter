@@ -1,0 +1,147 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://01_types/code_only/CharacterMotor2D.gd" type="Script" id=1]
+[ext_resource path="res://02_objects/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://00_res/images/player-8x8.png" type="Texture" id=3]
+[ext_resource path="res://01_types/code_tscn/ViewZone/ViewZone.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 24, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 3 )
+region = Rect2( 8, 24, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 8, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 16, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 3 )
+region = Rect2( 8, 16, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 8, 8, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 8, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 24, 8, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 8, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 3 )
+region = Rect2( 40, 8, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 8, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 40, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 18 ), SubResource( 19 ) ],
+"loop": false,
+"name": "jumping_left",
+"speed": 3.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": false,
+"name": "idle_left",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": false,
+"name": "idle_right",
+"speed": 1.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ) ],
+"loop": false,
+"name": "jumping_right",
+"speed": 3.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": true,
+"name": "walking_left",
+"speed": 14.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "walking_right",
+"speed": 14.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 72, 72 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="CharacterMotor2D" type="Node" parent="."]
+script = ExtResource( 1 )
+speed = 8.0
+crouching_speed = 0.0
+max_h_speed = 70.0
+max_v_speed = 200.0
+h_damping_factor = 0.3
+gravity_accel = 450.0
+jumping_accel = 3500.0
+crouching_jump_accel = 0.0
+jump_frames_treshold = 10
+jump_accel_frames_treshold = 10
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 3.95, 3, 2.95, 4, -2.95, 4, -3.95, 3, -3.95, -2.9, -2.95, -3.9, 2.95, -3.9, 3.95, -2.9 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 11 )
+animation = "idle_right"
+playing = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="ViewZone" parent="Camera2D" instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/ViewZone"]
+shape = SubResource( 2 )

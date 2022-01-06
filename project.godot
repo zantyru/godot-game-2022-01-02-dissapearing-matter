@@ -34,11 +34,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://02_objects/Finish/Finish.gd"
 }, {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://addons/godot-git-plugin/git_api.gdns"
-}, {
 "base": "Node2D",
 "class": "Level",
 "language": "GDScript",
@@ -70,7 +65,6 @@ _global_script_class_icons={
 "CharacterMotor2D": "",
 "DestroyerByOutOfView": "",
 "Finish": "",
-"GitAPI": "",
 "Level": "",
 "ParticlesOfPoof": "",
 "Player": "",
@@ -91,7 +85,7 @@ window/stretch/aspect="expand"
 
 [gdnative]
 
-singletons=[ "res://addons/godot-git-plugin/git_api.gdnlib" ]
+singletons=[  ]
 
 [input]
 

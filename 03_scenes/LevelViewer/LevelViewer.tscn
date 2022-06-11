@@ -6,47 +6,39 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_horizontal_guides_": [ 0.0, 360.0 ],
+"_edit_vertical_guides_": [ 140.0, 500.0 ]
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.94902, 0.952941, 0.956863, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -300.0
-margin_top = -300.0
-margin_right = 300.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 600, 600 )
+margin_left = -320.0
+margin_top = -180.0
+margin_right = -170.0
+margin_bottom = -30.0
 texture = ExtResource( 2 )
-expand = true
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -288.0
-margin_top = -288.0
-margin_right = 288.0
-margin_bottom = 288.0
+margin_left = -180.0
+margin_top = -180.0
+margin_right = 180.0
+margin_bottom = 180.0
 stretch = true
-stretch_shrink = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 144, 144 )
+size = Vector2( 360, 360 )
 handle_input_locally = false
 render_target_update_mode = 3
 shadow_atlas_quad_0 = 0
